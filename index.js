@@ -5,6 +5,10 @@ const
     exphbs = require( 'express-handlebars' ),
     router = require( './src/routes' );
 
+require( 'dotenv' ).config({
+    path: '.env'
+}); 
+
 /** Habita motor de plantillas Handlebars para las Vistas */
 app.engine( 'handlebars', exphbs.engine({
     defaultLayout:'layout'                  // Nombre archivo por defecto para el layout, lo buscará en el defecto layouts dentro del views.
@@ -18,4 +22,4 @@ app.use( express.static( path.join( __dirname, 'public' ) ) );
 /** Rutas */
 app.use( '/', router() );
 
-app.listen( 4000 );
+app.listen( process.env.PORT || 4000 );

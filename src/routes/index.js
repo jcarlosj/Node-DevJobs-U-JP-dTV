@@ -1,11 +1,10 @@
 const
     express = require( 'express' ),
-    router = express.Router();
+    router = express.Router(),
+    homeController = require( '../controllers/home.controller' );
 
 module.exports = () => {
-    router.get( '/', ( req, res ) => {
-        res.send( '<h2>DevJobs</h2>' );
-    });
+    router.get( '/', homeController.showJobOffers );
 
     return router;
 }

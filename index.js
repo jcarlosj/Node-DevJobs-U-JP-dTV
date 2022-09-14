@@ -1,3 +1,6 @@
+const mongoose = require( 'mongoose' );
+require( './src/config/db.config' );    // Importar la conexion de la base de datos
+
 const
     path = require( 'path' ),
     express = require( 'express' ),

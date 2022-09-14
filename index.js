@@ -1,9 +1,9 @@
 const
     express = require( 'express' ),
-    app = express();
+    app = express(),
+    router = require( './src/routes' );
 
-app.use( '/', ( req, res ) => {
-    res.send( '<h2>DevJobs</h2>' );
-});
+/** Rutas */
+app.use( '/', router() );
 
 app.listen( 4000 );

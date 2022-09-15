@@ -4,6 +4,7 @@ exports.showJobOffers = ( req, res ) => {
         namePage: 'Inicio',
         tagLine: 'Encuentra y Pública Trabajos para Desarrolladores Web',
         barra: true,
-        boton: true
+        boton: true,
+        session: JSON.stringify( req.session )
     });
 }

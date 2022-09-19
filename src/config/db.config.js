@@ -9,3 +9,7 @@ mongoose.connect( process.env.DATABASE_URL, {
 });
 
 mongoose.connection.on( 'error', err => console.error( err ) );
+
+
+/** Import Models */
+require( '../models/Vancancies' );

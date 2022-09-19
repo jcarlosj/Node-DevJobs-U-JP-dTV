@@ -30,7 +30,7 @@ const vacanciesSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
-    descriptions: {
+    description: {
         type: String,
         trim: true,
     },

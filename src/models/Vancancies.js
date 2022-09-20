@@ -66,4 +66,4 @@ vacanciesSchema.pre( 'save', function( next ) {
 });
 
 
-module.exports = mongoose.model( 'Vacant', vacanciesSchema );
+module.exports = mongoose.model( 'Vacancies', vacanciesSchema );

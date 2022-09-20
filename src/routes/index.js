@@ -6,7 +6,9 @@ const
 
 module.exports = () => {
     router.get( '/', homeController.showJobOffers );
-    router.get( '/vacantes/nueva', vacanciesController.formNewVacancy );
+    router.route( '/vacantes/nueva' )
+        .get( vacanciesController.formNewVacancy )
+        .post( vacanciesController.addNewVacancy );
 
     return router;
 }

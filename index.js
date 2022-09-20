@@ -31,6 +31,10 @@ store.on( 'error', function( error ) {
     console.error( error );
 });
 
+/** Habilita uso de JSON */
+app.use( express.json() );                              /** Habilita el uso de JSON en espera que los datos de la solicitud se envíen en formato JSON, que a menudo se asemeja a un objeto JS simple */
+app.use( express.urlencoded({ extended: true }) );      /** Habilita el uso de JSON dentro del body del request en espera que los datos de la solicitud se envíen codificados en la URL, generalmente en cadenas o matrices */
+
 /** Habita motor de plantillas Handlebars para las Vistas */
 app.engine( 'handlebars', exphbs.engine({
     defaultLayout:'layout',                 // Nombre archivo por defecto para el layout, lo buscará en el defecto layouts dentro del views.

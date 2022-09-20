@@ -33,7 +33,8 @@ store.on( 'error', function( error ) {
 
 /** Habita motor de plantillas Handlebars para las Vistas */
 app.engine( 'handlebars', exphbs.engine({
-    defaultLayout:'layout'                  // Nombre archivo por defecto para el layout, lo buscará en el defecto layouts dentro del views.
+    defaultLayout:'layout',                 // Nombre archivo por defecto para el layout, lo buscará en el defecto layouts dentro del views.
+    helpers: require( './src/helpers/handlebars' )    // Helpers para handlebars
 }));
 app.set( 'view engine', 'handlebars' );
 app.set( 'views', './src/views' );          // Ruta por defecto de las Vistas

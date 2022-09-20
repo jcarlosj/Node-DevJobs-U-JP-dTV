@@ -4,7 +4,9 @@
   "description": "Portal de empleo - NodeJS, Handlebars, Mongoose",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index"
+    "start": "concurrently \"npm run dev\" \"npm run watch\" ",
+    "dev": "nodemon ./index",
+    "watch": "webpack --watch --mode development"
   },
   "keywords": [
     "Node",

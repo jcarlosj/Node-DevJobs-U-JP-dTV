@@ -8,11 +8,13 @@ const
 */
 
 exports.formNewVacancy = ( req, res ) => {
+
     res.render( 'formNewVacancy', {
         siteName: 'devJobs',
         namePage: 'Nueva vacante',
         tagLine: 'Llena el formulario y publica tu vacante'
     });
+
 }
 
 exports.addNewVacancy = async ( req, res ) => {
@@ -22,4 +24,20 @@ exports.addNewVacancy = async ( req, res ) => {
     const newVacant = await vacant.save();          /** Guarda cambios de la nueva entidad Vacant en la base de datos */
     res.redirect( `/vacantes/${ newVacant.url }` );  /** Redirecciona a la url recien generada y guardada */
 
+}
+
+exports.showDetailVacant = async ( req, res, next ) => {
+    const vacant = await Vacant
+                            .findOne({ url: req.params.url })
+                            .lean();    // ! lean: Omite la creación de instancias de un documento completo de Mongoose (Object Mongoose => Object POJO) 
+                                        // !       https://mongoosejs.com/docs/tutorials/lean.html;
+
+    if( ! vacant ) return next();
+
+    res.render( 'vacant', {
+        siteName: vacant.title,
+        namePage: vacant.title,
+        barra: true,
+        vacant
+    });
 }

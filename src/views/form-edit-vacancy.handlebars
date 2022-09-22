@@ -1,5 +1,5 @@
 <main class="contenedor">
-    <form action="/vacantes/nueva" method="post" class="default-form">
+    <form action="/vacantes/editar/{{ vacant.url }}" method="post" class="default-form">
         <h3>Información general</h3>
 
         <div class="campo">
@@ -42,7 +42,7 @@
             <input type="hidden" name="skills" id="skills" />
         </ul>
         <div class="campo centrar-horizontal">
-            <input type="submit" value="Publicar" class="btn btn-azul" />
+            <input type="submit" value="Actualizar vacante" class="btn btn-azul" />
         </div>
     </form>
 </main>

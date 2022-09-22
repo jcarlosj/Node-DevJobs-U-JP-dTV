@@ -57,3 +57,20 @@ exports.formEditVacancy = async ( req, res, next ) => {
         vacant
     });
 }
+
+exports.updateVacancy = async ( req, res ) => {
+    const updatedVacant = req.body;
+
+    updatedVacant.skills = req.body.skills.split( ',' );    /** Convierte skills de una cadeba a un arreglo */
+
+    const editedVacant = await Vacant.findOneAndUpdate(
+        { url: req.params.url },
+        updatedVacant,
+        { 
+            new: true,              // ! Propiedad para indicar que nos devuelva los nuevos datos registrados (nuevo documento), por defecto retornara el registro anterior a la actualizacion
+            runValidators: true     // ! Activa validadores de actualizacion contra la estructura del modelo
+        }
+    );
+
+    res.redirect( `/vacantes/${ editedVacant.url }` );  /** Redirecciona a la url recien generada y guardada */
+}

@@ -9,7 +9,7 @@ const
 
 exports.formNewVacancy = ( req, res ) => {
 
-    res.render( 'formNewVacancy', {
+    res.render( 'form-new-vacancy', {
         siteName: 'devJobs',
         namePage: 'Nueva vacante',
         tagLine: 'Llena el formulario y publica tu vacante'
@@ -36,6 +36,22 @@ exports.showDetailVacant = async ( req, res, next ) => {
 
     res.render( 'vacant', {
         siteName: vacant.title,
+        namePage: vacant.title,
+        barra: true,
+        vacant
+    });
+}
+
+exports.formEditVacancy = async ( req, res, next ) => {
+    const vacant = await Vacant
+                            .findOne({ url: req.params.url })
+                            .lean();    // ! lean: Omite la creación de instancias de un documento completo de Mongoose (Object Mongoose => Object POJO) 
+                                        // !       https://mongoosejs.com/docs/tutorials/lean.html;
+
+    if( ! vacant ) return next();
+
+    res.render( 'form-edit-vacancy', {
+        siteName: `Editar - ${ vacant.title }`,
         namePage: vacant.title,
         barra: true,
         vacant

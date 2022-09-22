@@ -3,6 +3,8 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
     if( skills ) {
         skills.addEventListener( 'click', addSkill );
+
+        selectedSkills();
     }
 });
 
@@ -28,5 +30,22 @@ const addSkill = event => {
     }
 
     console.log( skills );
-    document.querySelector( '#skills' ).value = [ ...skills ];
+    document.querySelector( '#skills' ).value = [ ...skills ];  // Inyecta los tados en el input type="hidden"
+
+}
+
+const selectedSkills = () => {
+    /** Obtiene todos los elementos activos y el resultado lo convierte en un Array */
+    const selected = Array.from( 
+        document.querySelectorAll( '.lista-conocimientos .activo' ) 
+    );
+
+    /** Obtener todos los valores dentro de los elementos contenidos en el Array */
+    selected.forEach( el => {
+        skills.add( el.textContent );
+    });
+
+    console.log( skills );
+    document.querySelector( '#skills' ).value = [ ...skills ];  // Inyecta los tados en el input type="hidden"
+
 }

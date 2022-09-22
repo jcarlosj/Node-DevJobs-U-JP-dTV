@@ -10,6 +10,7 @@ module.exports = () => {
         .get( vacanciesController.formNewVacancy )
         .post( vacanciesController.addNewVacancy );
     router.get( '/vacantes/:url', vacanciesController.showDetailVacant );
+    router.get( '/vacantes/editar/:url', vacanciesController.formEditVacancy );
 
     return router;
 }

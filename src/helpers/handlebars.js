@@ -33,5 +33,26 @@ module.exports = {
             `$& selected="selected"`                // ! $& (alias de RegExp.lastMatch) que lee el valor del match y permite modificarlo cuando existe una coincidencia exitosa (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastMatch) 
         );
 
+    },
+    showAlerts: ( arrMessages = {}, alerts ) => {
+
+        let html = '';
+        const category = Object.keys( arrMessages );  // Obtiene nombre de las propiedades del arrErrors
+
+        console.log( 'arrErrors: ', arrMessages );
+        console.log( 'alerts: ', alerts.fn() );
+        console.log( 'category: ', category );
+
+        /** Valida que existan categorias para desplegar mensajes  */
+        if( category.length ) {
+            /** Itera los mensajes del array de mensajes bajo la categoria especifica para crear un componente para desplegar cada mensaje */
+            arrMessages[ category ].forEach( msg => {
+                html += `<div class="${ category } alerta">${ msg }</div>`;
+            });
+        }
+
+        console.log( html );
+
+        return alerts.fn().html = html;
     }
 }

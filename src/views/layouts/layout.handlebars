@@ -33,6 +33,14 @@
         {{/if}}
     </header>
     <div class="contenido-principal contenedor">
+        {{!-- Errores que pueden pasarse o no a las vistas --}}
+        {{#if messages }}  
+            <div class="alertas">
+                {{#showAlerts messages }}
+                {{/showAlerts }}
+            </div>
+        {{/if}}
+
         {{!-- Triple llave para que handlebars interprete el HTML --}}
         {{{ body }}}
     </div>

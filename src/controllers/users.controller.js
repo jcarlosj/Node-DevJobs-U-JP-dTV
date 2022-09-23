@@ -57,13 +57,13 @@ exports.validateFormCreateAccount = async ( req, res, next ) => {
         // ]
 
         // ! Mapeamos todos los mensajes de error existentes y los agregamos a req.flash.error
-        req.flash( 'error', errors.array().map( error => error.msg ) );     // ! Extrae el mensaje de la propiedad msg
+        req.flash( 'error', errors.array().map( error => error.msg ) );     // ! Extrae el mensaje de la propiedad error.msg a req.flash.error
         
         res.render( 'form-create-account', {
             siteName: 'Crea tu cuenta en devjobs',
             namePage: 'Crear cuenta',
             tagLine: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
-            errorMessages: req.flash()
+            messages: req.flash()      // Envia array con todos los mensajes de error bajo la propiedad 'error'
         });
 
         return;

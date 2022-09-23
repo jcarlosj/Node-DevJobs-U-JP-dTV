@@ -5,9 +5,11 @@ const
     PORT = process.env.PORT || 4000,
     path = require( 'path' ),
     express = require( 'express' ),
+    expressValidator = require( 'express-validator' ),
     app = express(),
     session = require( 'express-session' ),
     cookieParser = require( 'cookie-parser' ),
+    flash = require( 'connect-flash' ),
     exphbs = require( 'express-handlebars' ),
     router = require( './src/routes' ),
     MongoDBStore = require( 'connect-mongodb-session' )( session );     // ! agregue este paquete para almacenar la identificación de la sesión del usuario automáticamente en mongodb
@@ -61,6 +63,16 @@ app.use( session({              // ! Habilita un sistema de sesiones a partir de
     saveUninitialized: false,   // ! No guarda sesión si no se modifica
     store                       // ! Agrega el store a la sesión
 }));
+
+/** Habilita alertas y mensajes flash */
+app.use( flash() );
+
+/** Crea middleware para almacenar los mensajes en los request de express */
+app.use( ( req, res, next ) => {
+    res.locals.messages = req.flash();
+
+    next();
+});
 
 /** Rutas */
 app.use( '/', router() );

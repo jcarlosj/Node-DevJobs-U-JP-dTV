@@ -38,6 +38,16 @@ usersSchema.pre( 'save', async function( next ) {
     next();
 
 });
+// ! Posterior a guardar
+usersSchema.post( 'save', async function( error, doc, next ) {
+    // console.error( error );  // ! MongoServerError: E11000 duplicate key error collection: devjobs.users index: email_1 dup key: { email: "evasofia@correo.co" }
+
+    /** Valida que exista un error especifico para personalizar el mensaje de error  */
+    if( error.name === 'MongoServerError' && error.code === 11000 )
+        next( 'Correo ya está registrado!' );
+    else
+        next( error );
+});
 
 
 module.exports = mongoose.model( 'Users', usersSchema );

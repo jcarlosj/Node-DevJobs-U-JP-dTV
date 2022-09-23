@@ -73,14 +73,17 @@ exports.validateFormCreateAccount = async ( req, res, next ) => {
 }
 
 exports.createNewUser = async ( req, res, next ) => {
-    // TODO: Verificar que el correo que se va a crear no existe y controlar el error
-    const
-        user = new Users( req.body ),
+    const user = new Users( req.body );
+        
+    try {
         newUser = await user.save();
+        
+        res.redirect( '/iniciar-sesion' );
+    }
+    catch( error ) {
+        req.flash( 'error', error );    // ! Agrega el error a req.flash.error
 
-    if( ! newUser )
-        return next();
-
-    res.redirect( '/iniciar-sesion' );
+        res.redirect( '/crear-cuenta' );
+    }
 
 }

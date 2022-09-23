@@ -57,7 +57,7 @@ const selectedSkills = () => {
 
 const clearAlerts = ( alerts ) => {
 
-    const intervalID = setInterval( () => {
+    let intervalID = setInterval( () => {
         /** Validamos si el elemento tiene elementos hijos */
         if( alerts.children.length > 0 ) {
             alerts.removeChild( alerts.children[ 0 ] );  // ! Elimina el primer hijo del elemento alerts

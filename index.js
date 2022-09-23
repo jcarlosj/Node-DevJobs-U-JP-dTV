@@ -2,6 +2,7 @@ const mongoose = require( 'mongoose' );
 require( './src/config/db.config' );    // Importar la conexion de la base de datos
 
 const
+    PORT = process.env.PORT || 4000,
     path = require( 'path' ),
     express = require( 'express' ),
     app = express(),
@@ -24,7 +25,13 @@ var store = new MongoDBStore({
         collection: 'sessions'                      // ! Colección MongoDB para almacenar sesiones
     },
     function( error ) {
-        console.error( error );
+        if( error ) {
+            console.error( error );
+            return false;
+        }
+
+        console.log( 'Database is connected!' );
+        
     });
 
 store.on( 'error', function( error ) {
@@ -58,4 +65,6 @@ app.use( session({              // ! Habilita un sistema de sesiones a partir de
 /** Rutas */
 app.use( '/', router() );
 
-app.listen( process.env.PORT || 4000 );
+app.listen( PORT, () => {
+    console.log( `Server listening on port ${ PORT }` );
+} );

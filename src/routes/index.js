@@ -20,6 +20,8 @@ module.exports = () => {
             usersController.validateFormCreateAccount,
             usersController.createNewUser 
         );
+    router.route( '/iniciar-sesion' )
+        .get( usersController.formLogin );
 
     return router;
 }

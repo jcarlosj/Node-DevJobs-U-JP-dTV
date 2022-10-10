@@ -87,3 +87,11 @@ exports.createNewUser = async ( req, res, next ) => {
     }
 
 }
+
+
+exports.formLogin = ( req, res ) => {
+    res.render( 'form-login', {
+        siteName: 'Iniciar sesión en devjobs',
+        namePage: 'Iniciar sesión'
+    });
+}

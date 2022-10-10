@@ -3,5 +3,6 @@ const passport = require( 'passport' );
 
 exports.authenticateUser = passport.authenticate( 'local', {
     successRedirect: '/ok',
-    failureRedirect: '/fail'
+    failureRedirect: '/iniciar-sesion',
+    failureFlash: true
 });

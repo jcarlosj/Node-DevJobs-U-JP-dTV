@@ -1,11 +1,11 @@
 const
-    password = require( 'password' ),
-    LocalStrategy = require( 'password-local' ).Strategy,
+    passport = require( 'passport' ),
+    LocalStrategy = require( 'passport-local' ).Strategy,
     mongoose = require( 'mongoose' ),
     Users = mongoose.model( 'Users' );
 
 
-password.use( new LocalStrategy({
+    passport.use( new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
 }, async ( email, password, done ) => {
@@ -38,9 +38,9 @@ password.use( new LocalStrategy({
 }) );
 
 
-password.serializeUser( ( user, done ) => done( null, userFound._id ) );
+passport.serializeUser( ( user, done ) => done( null, userFound._id ) );
 
-password.deserializeUser( async( id, done ) => {
+passport.deserializeUser( async( id, done ) => {
     const userFound = await Users.findById( id ).exec();
 
     return done( null, userFound );

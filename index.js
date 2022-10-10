@@ -5,14 +5,13 @@ const
     PORT = process.env.PORT || 4000,
     path = require( 'path' ),
     express = require( 'express' ),
-    expressValidator = require( 'express-validator' ),
     app = express(),
     session = require( 'express-session' ),
     cookieParser = require( 'cookie-parser' ),
     flash = require( 'connect-flash' ),
     exphbs = require( 'express-handlebars' ),
     router = require( './src/routes' ),
-    passport = require( './config/passport' ),
+    passport = require( './src/config/passport.config' ),
     MongoDBStore = require( 'connect-mongodb-session' )( session );     // ! agregue este paquete para almacenar la identificación de la sesión del usuario automáticamente en mongodb
                                                                         // ! verifique su base de datos, tendrá otra colección (junto a personas) que es 'sessions'
 require( 'dotenv' ).config({

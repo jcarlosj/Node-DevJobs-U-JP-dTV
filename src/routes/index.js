@@ -3,7 +3,8 @@ const
     router = express.Router(),
     homeController = require( '../controllers/home.controller' ),
     vacanciesController = require( '../controllers/vacancies.controller' ),
-    usersController = require( '../controllers/users.controller' );
+    usersController = require( '../controllers/users.controller' ),
+    authController = require( '../controllers/auth.controller' );
 
 module.exports = () => {
     router.get( '/', homeController.showJobOffers );
@@ -21,7 +22,8 @@ module.exports = () => {
             usersController.createNewUser 
         );
     router.route( '/iniciar-sesion' )
-        .get( usersController.formLogin );
+        .get( usersController.formLogin )
+        .post( authController.authenticateUser);
 
     return router;
 }

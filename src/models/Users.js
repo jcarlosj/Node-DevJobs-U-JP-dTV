@@ -27,7 +27,7 @@ const usersSchema = new mongoose.Schema({
     expirationDate: Date
 });
 
-// ! Antes de guardar
+// ! Antes de guardar encripta el password
 usersSchema.pre( 'save', async function( next ) {
     // ! Valida si el password esta hasheado (encriptado)
     if( ! this.isModified( 'password' ) ) 
@@ -38,7 +38,8 @@ usersSchema.pre( 'save', async function( next ) {
     next();
 
 });
-// ! Posterior a guardar
+
+// ! Posterior a guardar envia mensaje de alerta si un usuario ya esta registrado
 usersSchema.post( 'save', async function( error, doc, next ) {
     // console.error( error );  // ! MongoServerError: E11000 duplicate key error collection: devjobs.users index: email_1 dup key: { email: "evasofia@correo.co" }
 
@@ -48,6 +49,15 @@ usersSchema.post( 'save', async function( error, doc, next ) {
     else
         next( error );
 });
+
+// ! Agrega nuevos metodos al Modelo
+usersSchema.methods = {
+    // Valida contraseña para la autenticacion de usuarios
+    comparePassword: function ( pass ) {
+
+        return bcrypt.compareSync( pass, this.password );
+    }
+}
 
 
 module.exports = mongoose.model( 'Users', usersSchema );

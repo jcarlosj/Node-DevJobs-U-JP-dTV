@@ -12,6 +12,7 @@ const
     flash = require( 'connect-flash' ),
     exphbs = require( 'express-handlebars' ),
     router = require( './src/routes' ),
+    passport = require( './config/passport' ),
     MongoDBStore = require( 'connect-mongodb-session' )( session );     // ! agregue este paquete para almacenar la identificación de la sesión del usuario automáticamente en mongodb
                                                                         // ! verifique su base de datos, tendrá otra colección (junto a personas) que es 'sessions'
 require( 'dotenv' ).config({
@@ -63,6 +64,10 @@ app.use( session({              // ! Habilita un sistema de sesiones a partir de
     saveUninitialized: false,   // ! No guarda sesión si no se modifica
     store                       // ! Agrega el store a la sesión
 }));
+
+/** Habilitar e inicializar Passport */
+app.use( passport.initialize() );
+app.use( passport.session() );
 
 /** Habilita alertas y mensajes flash */
 app.use( flash() );
